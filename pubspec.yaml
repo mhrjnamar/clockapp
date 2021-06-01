@@ -22,6 +22,7 @@ environment:
 
 dependencies:
   intl: any
+  provider: any
   flutter:
     sdk: flutter
 

@@ -21,6 +21,8 @@ environment:
   sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
+  flutter_local_notifications: any
+  dotted_border: any
   intl: any
   provider: any
   flutter:

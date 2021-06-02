@@ -1,5 +1,5 @@
 import 'package:clockapp/enums.dart';
-import 'package:clockapp/menu_info.dart';
+import 'package:clockapp/models/menu_info.dart';
 import 'package:clockapp/views/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,8 +10,10 @@ void main() {
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
+    print('log');
     return MaterialApp(
       theme: ThemeData(
           primarySwatch: Colors.blue,

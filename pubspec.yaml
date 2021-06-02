@@ -21,10 +21,15 @@ environment:
   sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
+  sqflite: any
   flutter_local_notifications: any
   dotted_border: any
   intl: any
   provider: any
+  platform: any
+  timezone: any
+  rxdart: any
+  flutter_native_timezone: any
   flutter:
     sdk: flutter
 

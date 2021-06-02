@@ -1,7 +1,10 @@
 import 'package:clockapp/constants/theme_data.dart';
 import 'package:clockapp/data.dart';
+import 'package:clockapp/main.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:timezone/timezone.dart' as tz;
 
 class AlarmPage extends StatefulWidget {
   const AlarmPage({Key? key}) : super(key: key);
@@ -114,7 +117,9 @@ class _AlarmPageState extends State<AlarmPage> {
                           padding: MaterialStateProperty.all(
                               const EdgeInsets.symmetric(
                                   horizontal: 32, vertical: 16))),
-                      onPressed: () {},
+                      onPressed: () {
+                        _scheduleAlarm();
+                      },
                       child: Column(
                         children: [
                           Image.asset(
@@ -140,5 +145,32 @@ class _AlarmPageState extends State<AlarmPage> {
         ],
       ),
     );
+  }
+
+  void _scheduleAlarm() async {
+    var androoidPlatfromChannelSpecifics = AndroidNotificationDetails(
+        "alarm_notif", "alarm_notif", "Channel for Alarm notification",
+        icon: "app_icon",
+        sound: RawResourceAndroidNotificationSound('a_long_cold_sting'),
+        largeIcon: DrawableResourceAndroidBitmap('app_icon'));
+
+    var iOSPlatformChannelSpecifics = IOSNotificationDetails(
+        sound: 'a_long_cold_sting.wav',
+        presentAlert: true,
+        presentBadge: true,
+        presentSound: true);
+    var platformChannelSpecifics = NotificationDetails(
+        android: androoidPlatfromChannelSpecifics,
+        iOS: iOSPlatformChannelSpecifics);
+
+    await flutterLocalNotificationsPlugin.zonedSchedule(
+        0,
+        'Office',
+        'Good morning! Time for office.',
+        tz.TZDateTime.now(tz.local).add(const Duration(seconds: 10)),
+        platformChannelSpecifics,
+        androidAllowWhileIdle: true,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime);
   }
 }
